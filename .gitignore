@@ -1,3 +1,9 @@
-/obj
-/bin
+/ProEvents.API/obj
+/ProEvents.API/bin
+/ProEvents.Application/obj
+/ProEvents.Application/bin
+/ProEvents.Domain/obj
+/ProEvents.Domain/bin
+/ProEvents.Persistence/obj
+/ProEvents.Persistence/bin
 /.vs/*
