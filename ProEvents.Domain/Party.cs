@@ -16,7 +16,7 @@ namespace ProEvents.Domain
         public string? ImageUrl { get; set; }
         public string? Email { get; set; }
         public string? Phone { get; set; }
-        public IEnumerable<Part>? Part { get; set; }
+        public IEnumerable<Part>? Parts { get; set; }
         public IEnumerable<SocialNetwork>? SocialNetwork { get; set; }
         public IEnumerable<SpeakerParty> SpeakerParties { get; set; }
     }
