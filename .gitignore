@@ -7,3 +7,5 @@
 /ProEvents.Persistence/obj
 /ProEvents.Persistence/bin
 /.vs/*
+/obj/*
+/bin/*

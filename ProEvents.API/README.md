@@ -32,3 +32,9 @@ dotnet add ProEvents.Application/ProEvents.Application.csproj reference ProEvent
 dotnet add ProEvents.Application/ProEvents.Application.csproj reference ProEvents.Persistence
 
 dotnet add ProEvents.Persistence/ProEvents.Persistence.csproj reference ProEvents.Domain
+
+## create migration with DDD structure
+dotnet ef migrations add Initial -p ProEvents.Persistence -s ProEvents.API
+
+# create database
+dotnet ef database update -s ProEvents.API

@@ -1,4 +1,4 @@
-using Event.API.Data;
+using ProEvents.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -14,7 +14,7 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-string connectionString = "server=localhost;port=3306;database=events;user=root;password=1234;SslMode=None"; //builder.Configuration.GetConnectionString("Default");
+string connectionString = "server=localhost;port=3306;database=events;user=root;password=1234;SslMode=None;AllowPublicKeyRetrieval=True"; //builder.Configuration.GetConnectionString("Default");
 
 builder.Services.AddDbContext<DataContext>(
     options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
