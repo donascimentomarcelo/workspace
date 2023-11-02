@@ -1,5 +1,5 @@
-using Event.API.Data;
-using Event.API.Models;
+using ProEvents.Domain;
+using ProEvents.Persistence;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Event.API.Controllers;
@@ -22,7 +22,7 @@ public class PartyController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public Party GetById(int id) => context.Parties.FirstOrDefault(ev => ev.Id == id);
+    public Party GetById(int id) => context.Parties.First(ev => ev.Id == id);
 
     [HttpPost]
     public ActionResult<Party> Post([FromBody] Party party)
