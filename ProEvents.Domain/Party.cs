@@ -11,7 +11,7 @@ namespace ProEvents.Domain
         public int Id { get; set; }
         public string? Address { get; set; }
         public DateTime? PartyDate { get; set; }
-        public string? Theme { get; set; }
+        public string Theme { get; set; }
         public int? AmountOfPeople { get; set; }
         public string? ImageUrl { get; set; }
         public string? Email { get; set; }
