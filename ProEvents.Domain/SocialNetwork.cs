@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProEvents.Domain
 {
-    internal class SocialNetwork
+    public class SocialNetwork
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProEvents.Domain
 {
-    internal class Party
+    public class Party
     {
         public int Id { get; set; }
         public string? Address { get; set; }
