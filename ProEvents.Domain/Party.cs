@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProEvents.Domain
+﻿namespace ProEvents.Domain
 {
     public class Party
     {
@@ -17,7 +11,7 @@ namespace ProEvents.Domain
         public string? Email { get; set; }
         public string? Phone { get; set; }
         public IEnumerable<Part>? Parts { get; set; }
-        public IEnumerable<SocialNetwork>? SocialNetwork { get; set; }
-        public IEnumerable<SpeakerParty> SpeakerParties { get; set; }
+        public IEnumerable<SocialNetwork>? SocialNetworks { get; set; }
+        public IEnumerable<SpeakerParty>? SpeakerParties { get; set; }
     }
 }

@@ -1,35 +1,49 @@
-using ProEvents.Domain;
-using ProEvents.Persistence;
+using Event.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using ProEvents.Domain;
 
 namespace Event.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/parties/[controller]")]
 public class PartyController : ControllerBase
 {
-    private readonly DataContext context;
+    private readonly IPartyService partyService;
 
-    public PartyController(DataContext context)
+    public PartyController(IPartyService partyService)
     {
-        this.context = context;
+        this.partyService = partyService;
     }
 
     [HttpGet]
-    public IEnumerable<Party> Get()
+    public async Task<IActionResult> Get()
     {
-        return this.context.Parties;
+        var parties = await partyService.GetAllPartiesAsync(true);
+        return Ok(parties);
     }
 
     [HttpGet("{id}")]
-    public Party GetById(int id) => context.Parties.First(ev => ev.Id == id);
+    public async Task<IActionResult> GetById(int id) => Ok(await partyService.GetPartyByIdAsync(id, true));
 
     [HttpPost]
-    public ActionResult<Party> Post([FromBody] Party party)
+    public async Task<IActionResult> Post([FromBody] Party model)
     {
-        context.Parties.Add(party);
-        context.SaveChanges();
+        var party = await partyService.Add(model);
+        return Ok(party);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await partyService.Remove(id);
         return Ok();
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update([FromBody] Party model, int id)
+    {
+        var party = await partyService.Update(id, model);
+        return Ok(party);
     }
 
 }

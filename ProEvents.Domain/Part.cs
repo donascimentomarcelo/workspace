@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProEvents.Domain
+﻿namespace ProEvents.Domain
 {
     public class Part
     {
@@ -15,6 +9,6 @@ namespace ProEvents.Domain
         public DateTime? EndDate { get; set; }
         public int Amount { get; set; }
         public int PartyId { get; set; }
-        public Party Party { get; set; }
+        public Party? Party { get; set; }
     }
 }

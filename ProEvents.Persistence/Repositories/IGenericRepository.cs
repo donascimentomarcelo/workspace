@@ -1,6 +1,6 @@
 ﻿namespace ProEvents.Persistence.Repositories
 {
-    internal interface IGenericRepository
+    public interface IGenericRepository
     {
         void Add<T>(T entity) where T : class;
         void Update<T>(T entity) where T : class;

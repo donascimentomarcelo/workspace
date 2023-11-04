@@ -2,7 +2,7 @@
 
 namespace ProEvents.Persistence.Repositories
 {
-    internal interface ISpeakersRepository
+    public interface ISpeakersRepository
     {
         Task<Speaker[]> GetAllSpeakersByNameAsync(string name, bool includeParties);
         Task<Speaker[]> GetAllSpeakersAsync(bool includeParties);

@@ -18,6 +18,16 @@ namespace ProEvents.Persistence
         {
             modelBuilder.Entity<SpeakerParty>()
                 .HasKey(SP => new { SP.PartyId, SP.SpeakerId });
+
+            modelBuilder.Entity<Party>()
+                .HasMany(s => s.SocialNetworks)
+                .WithOne(s => s.Party)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Speaker>()
+                .HasMany(s => s.SocialNetworks)
+                .WithOne(s => s.Speaker)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

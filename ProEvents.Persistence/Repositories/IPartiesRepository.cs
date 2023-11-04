@@ -2,7 +2,7 @@
 
 namespace ProEvents.Persistence.Repositories
 {
-    internal interface IPartiesRepository
+    public interface IPartiesRepository
     {
         Task<Party[]> GetAllPartiesByThemeAsync(string theme, bool includeSpeakers);
         Task<Party[]> GetAllPartiesAsync(bool includeSpeakers);

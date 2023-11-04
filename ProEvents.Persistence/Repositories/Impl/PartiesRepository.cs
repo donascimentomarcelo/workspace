@@ -14,13 +14,14 @@ namespace ProEvents.Persistence.Repositories.Impl
         public async Task<Party[]> GetAllPartiesAsync(bool includeSpeakers)
         {
             IQueryable<Party> query = context.Parties.Include(party => party.Parts)
-                .Include(party => party.SocialNetwork);
+                .Include(party => party.SocialNetworks);
 
             if (includeSpeakers)
                 query = query.Include(party => party.SpeakerParties)
                              .ThenInclude(speakerParty => speakerParty.Speaker);
 
             query = query
+                .AsNoTracking()
                 .OrderBy(e => e.Id);
 
             return await query.ToArrayAsync();
@@ -29,13 +30,14 @@ namespace ProEvents.Persistence.Repositories.Impl
         public async Task<Party[]> GetAllPartiesByThemeAsync(string theme, bool includeSpeakers)
         {
             IQueryable<Party> query = context.Parties.Include(party => party.Parts)
-                .Include(party => party.SocialNetwork);
+                .Include(party => party.SocialNetworks);
 
             if (includeSpeakers)
                 query = query.Include(party => party.SpeakerParties)
                              .ThenInclude(speakerParty => speakerParty.Speaker);
 
             query = query
+                .AsNoTracking()
                 .OrderBy(e => e.Id)
                 .Where(e => e.Theme.ToLower().Contains(theme.ToLower()));
 
@@ -45,13 +47,14 @@ namespace ProEvents.Persistence.Repositories.Impl
         public async Task<Party> GetPartyByIdAsync(int id, bool includeSpeakers)
         {
             IQueryable<Party> query = context.Parties.Include(party => party.Parts)
-               .Include(party => party.SocialNetwork);
+               .Include(party => party.SocialNetworks);
 
             if (includeSpeakers)
                 query = query.Include(party => party.SpeakerParties)
                              .ThenInclude(speakerParty => speakerParty.Speaker);
 
             query = query
+                .AsNoTracking()
                 .OrderBy(e => e.Id)
                 .Where(e => e.Id == id);
 
