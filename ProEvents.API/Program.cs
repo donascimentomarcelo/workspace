@@ -16,6 +16,7 @@ builder.Services.AddControllers()
 builder.Services.AddCors();
 builder.Services.AddControllersWithViews()
         .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

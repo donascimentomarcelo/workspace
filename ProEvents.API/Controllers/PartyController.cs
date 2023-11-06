@@ -1,6 +1,7 @@
+
 using Event.API.Services;
 using Microsoft.AspNetCore.Mvc;
-using ProEvents.Domain;
+using ProEvents.Application.Dtos;
 
 namespace Event.API.Controllers;
 
@@ -26,9 +27,9 @@ public class PartyController : ControllerBase
     public async Task<IActionResult> GetById(int id) => Ok(await partyService.GetPartyByIdAsync(id, true));
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Party model)
+    public async Task<IActionResult> Post([FromBody] PartyDto dto)
     {
-        var party = await partyService.Add(model);
+        var party = await partyService.Add(dto);
         return Ok(party);
     }
 
@@ -40,9 +41,9 @@ public class PartyController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update([FromBody] Party model, int id)
+    public async Task<IActionResult> Update([FromBody] PartyDto dto, int id)
     {
-        var party = await partyService.Update(id, model);
+        var party = await partyService.Update(id, dto);
         return Ok(party);
     }
 
