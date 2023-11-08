@@ -10,5 +10,8 @@
         public string ImageUrl { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public IEnumerable<PartDto>? Parts { get; set; }
+        public IEnumerable<SocialNetworkDto>? SocialNetworks { get; set; }
+        public IEnumerable<SpeakerPartyDto>? SpeakerParties { get; set; }
     }
 }
