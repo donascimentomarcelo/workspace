@@ -9,6 +9,6 @@
         public string EndDate { get; set; }
         public int Amount { get; set; }
         public int PartyId { get; set; }
-        public PartyDto Party { get; set; }
+        //public PartyDto Party { get; set; }
     }
 }
