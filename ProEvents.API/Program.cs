@@ -21,7 +21,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPartyService, PartyService>();
+builder.Services.AddScoped<IPartService, PartService>();
 builder.Services.AddScoped<IPartiesRepository, PartiesRepository>();
+builder.Services.AddScoped<IPartsRepository, PartsRepository>();
 builder.Services.AddScoped<IGenericRepository, GenericRepository>();
 
 string connectionString = "server=localhost;port=3306;database=events;user=root;password=1234;SslMode=None;AllowPublicKeyRetrieval=True"; //builder.Configuration.GetConnectionString("Default");
