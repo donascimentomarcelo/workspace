@@ -1,3 +1,7 @@
+## run locally
+
+dotnet watch run
+
 ## create migration
 
 dotnet ef migrations add Migration_Name -o Data/Migrations

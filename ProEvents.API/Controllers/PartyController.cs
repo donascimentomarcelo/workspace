@@ -47,4 +47,12 @@ public class PartyController : ControllerBase
         return Ok(party);
     }
 
+    [HttpPost("upload-image/{partyId}")]
+    public async Task<IActionResult> UploadImage(int partyId)
+    {
+        var file = Request.Form.Files[0];
+        await partyService.UploadImageParty(partyId, file);
+        return Ok();
+    }
+
 }

@@ -1,6 +1,7 @@
 using Event.API.Services;
 using Event.API.Services.Impl;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using ProEvents.Persistence;
 using ProEvents.Persistence.Repositories;
 using ProEvents.Persistence.Repositories.Impl;
@@ -47,6 +48,12 @@ app.UseAuthorization();
 app.UseCors(cors => cors.AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowAnyOrigin());
+
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Resources")),
+    RequestPath = new PathString("/Resources")
+});
 
 app.MapControllers();
 

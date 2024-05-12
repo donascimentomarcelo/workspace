@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ProEvents.Application.Dtos;
 using ProEvents.Domain;
 using ProEvents.Persistence.Repositories;
@@ -10,15 +11,18 @@ namespace Event.API.Services.Impl
         private readonly IPartiesRepository partiesRepository;
         private readonly IGenericRepository genericRepository;
         private readonly IMapper mapper;
+        private readonly IWebHostEnvironment environment;
 
         public PartyService(
             IPartiesRepository partiesRepository,
             IGenericRepository genericRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IWebHostEnvironment environment)
         {
             this.partiesRepository = partiesRepository;
             this.genericRepository = genericRepository;
             this.mapper = mapper;
+            this.environment = environment;
         }
         public async Task<PartyDto> Add(PartyDto dto)
         {
@@ -116,6 +120,48 @@ namespace Event.API.Services.Impl
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task UploadImageParty(int partyId, IFormFile file)
+        {
+            var party = await GetPartyByIdAsync(partyId);
+
+            if (file.Length > 0)
+            {
+                DeleteImage(party.ImageUrl);
+                party.ImageUrl = await SaveImage(file);
+            }
+
+            await Update(partyId, party);
+        }
+
+
+
+        [NonAction]
+        public async Task<string> SaveImage(IFormFile file)
+        {
+            string imageName = new string(
+                Path.GetFileNameWithoutExtension(file.FileName)
+                .Take(10)
+                .ToArray())
+                .Replace(' ', '-');
+
+            imageName = $"{imageName}{DateTime.UtcNow.ToString("yymmddfff")}{Path.GetExtension(file.FileName)}";
+
+            var imagePath = Path.Combine(environment.ContentRootPath, @"Resources/images", imageName);
+
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+            return imageName;
+        }
+
+        [NonAction]
+        public void DeleteImage(string imageName)
+        {
+            var imagePath = Path.Combine(environment.ContentRootPath, @"Resources/images", imageName);
+            if (System.IO.File.Exists(imagePath)) { System.IO.File.Delete(imagePath); }
         }
 
     }

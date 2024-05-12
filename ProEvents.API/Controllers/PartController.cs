@@ -10,9 +10,11 @@ namespace Event.API.Controllers;
 public class PartController : ControllerBase
 {
     private readonly IPartService partService;
+    private readonly IWebHostEnvironment environment;
 
-    public PartController(IPartService partService)
+    public PartController(IPartService partService, IWebHostEnvironment environment)
     {
+        this.environment = environment;
         this.partService = partService;
     }
 

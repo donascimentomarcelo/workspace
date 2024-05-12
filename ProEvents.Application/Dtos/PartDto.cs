@@ -10,5 +10,6 @@
         public int Amount { get; set; }
         public int PartyId { get; set; }
         //public PartyDto Party { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

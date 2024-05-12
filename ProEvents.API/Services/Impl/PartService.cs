@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System.Collections;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ProEvents.Application.Dtos;
 using ProEvents.Domain;
 using ProEvents.Persistence.Repositories;
@@ -10,15 +12,20 @@ namespace Event.API.Services.Impl
         private readonly IPartsRepository partsRepository;
         private readonly IGenericRepository genericRepository;
         private readonly IMapper mapper;
+        private readonly IWebHostEnvironment environment;
+
 
         public PartService(
             IPartsRepository partsRepository,
             IGenericRepository genericRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IWebHostEnvironment environment)
         {
             this.partsRepository = partsRepository;
             this.genericRepository = genericRepository;
             this.mapper = mapper;
+            this.environment = environment;
+
         }
 
         public async Task AddPart(int id, PartDto dto)

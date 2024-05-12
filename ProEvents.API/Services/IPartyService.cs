@@ -12,5 +12,6 @@ namespace Event.API.Services
         Task<PartyDto[]> GetAllPartiesByThemeAsync(string theme, bool includeSpeakers = false);
         Task<PartyDto[]> GetAllPartiesAsync(bool includeSpeakers = false);
         Task<PartyDto> GetPartyByIdAsync(int id, bool includeSpeakers = false);
+        Task UploadImageParty(int partyId, IFormFile file);
     }
 }
