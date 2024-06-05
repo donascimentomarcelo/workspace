@@ -1,9 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ProEvents.Domain;
+using ProEvents.Domain.Identity;
 
 namespace ProEvents.Persistence
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User, Role, int,
+                                                    IdentityUserClaim<int>, UserRole,
+                                                    IdentityUserLogin<int>, IdentityRoleClaim<int>,
+                                                    IdentityUserToken<int>>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -16,6 +22,23 @@ namespace ProEvents.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<UserRole>(userRole =>
+            {
+                userRole.HasKey(x => new { x.UserId, x.RoleId });
+                userRole.HasOne(x => x.Role)
+                        .WithMany(x => x.UserRoles)
+                        .HasForeignKey(x => x.RoleId)
+                        .IsRequired();
+
+                userRole.HasOne(x => x.User)
+                        .WithMany(x => x.UserRoles)
+                        .HasForeignKey(x => x.UserId)
+                        .IsRequired();
+            });
+
             modelBuilder.Entity<SpeakerParty>()
                 .HasKey(SP => new { SP.PartyId, SP.SpeakerId });
 

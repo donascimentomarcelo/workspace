@@ -39,3 +39,9 @@ dotnet add ProEvents.Application/ProEvents.Application.csproj reference ProEvent
 dotnet add ProEvents.Application/ProEvents.Application.csproj reference ProEvents.Persistence
 
 dotnet add ProEvents.Persistence/ProEvents.Persistence.csproj reference ProEvents.Domain
+
+# crating migrations and adding identity
+
+dotnet ef migrations add Add-Identity -p ProEvents.Persistence/ -s ProEvents.API/
+
+dotnet ef database update -s ProEvents.API

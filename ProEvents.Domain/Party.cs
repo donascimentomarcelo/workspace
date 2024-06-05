@@ -12,7 +12,7 @@ namespace ProEvents.Domain
         public string ImageUrl { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public int UserId { get; set; }
+        // public int UserId { get; set; }
         public User User { get; set; }
         public IEnumerable<Part>? Parts { get; set; }
         public IEnumerable<SocialNetwork>? SocialNetworks { get; set; }

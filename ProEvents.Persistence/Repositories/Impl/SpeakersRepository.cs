@@ -35,7 +35,7 @@ namespace ProEvents.Persistence.Repositories.Impl
 
             query = query
                 .OrderBy(s => s.Id)
-                .Where(s => s.Name.ToLower().Contains(name.ToLower()));
+                .Where(s => s.User.FirstName.ToLower().Contains(name.ToLower()));
 
             return await query.ToArrayAsync();
         }
